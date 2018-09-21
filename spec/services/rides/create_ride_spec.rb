@@ -19,7 +19,7 @@ describe Rides::CreateRide, type: :service do
     end
     let(:start_address_coords) { [25.372, -23.218] }
     let(:destination_coords) { [145.964, 89.263] }
-    let(:distance) { 327.7 }
+    let(:distance) { 327.45673 }
 
     before do
       allow(Geocoder).to receive(:coordinates)
@@ -38,13 +38,17 @@ describe Rides::CreateRide, type: :service do
       expect(ride).to be_persisted
     end
 
-    it 'creates a new ride with correct attributes' do
+    it 'calculates the distance and rounds it to an integer' do
+      ride = subject.call
+      expect(ride.distance).to eq(327)
+    end
+
+    it 'sets proper attributes to the Ride' do
       ride = subject.call
       expect(ride.start_address).to eq(start_address)
       expect(ride.destination_address).to eq(destination_address)
       expect(ride.price).to eq(price)
       expect(ride.date).to eq(date)
-      expect(ride.distance).to eq(distance)
     end
   end
 end
