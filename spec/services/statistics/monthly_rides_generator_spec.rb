@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe Statistics::MonthlyRidesGenerator, type: :service do
-  let(:date1) { 8.days.ago }
-  let(:date2) { 10.days.ago }
-  let(:date3) { 3.months.ago }
+  let(:date1) { '14.09.2018' }
+  let(:date2) { '12.09.2018' }
+  let(:date3) { '22.06.2018' }
 
   let!(:ride_same_day_1) do
     Ride.create!(
@@ -63,24 +63,16 @@ describe Statistics::MonthlyRidesGenerator, type: :service do
     result = subject.call
     expect(result.size).to eq(2)
     expect(result.first).to eq(
-      {
-        day: format_date(date2),
-        total_distance: '30km',
-        avg_ride: '15km',
-        avg_price: "#{avg_price_2}PLN"
-      }
+      day: 'September, 12th',
+      total_distance: '30km',
+      avg_ride: '15km',
+      avg_price: "#{avg_price_2}PLN"
     )
     expect(result.second).to eq(
-      {
-        day: format_date(date1),
-        total_distance: '20km',
-        avg_ride: '10km',
-        avg_price: "#{avg_price_1}PLN"
-      }
+      day: 'September, 14th',
+      total_distance: '20km',
+      avg_ride: '10km',
+      avg_price: "#{avg_price_1}PLN"
     )
-  end
-
-  def format_date(date)
-    date.strftime("%B, #{date.day.ordinalize}")
   end
 end
