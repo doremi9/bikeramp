@@ -4,8 +4,6 @@ class RidesQuery
   end
 
   def rides_monthly
-    Ride.where(
-      date: Date.current.beginning_of_month..Date.current.end_of_month
-    ).order('date ASC').group_by(&:date)
+    Ride.where(date: Date.current.beginning_of_month..Date.current.end_of_month)
   end
 end

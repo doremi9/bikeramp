@@ -1,12 +1,6 @@
 module Statistics
   class MonthlyRidesGenerator
     def call
-      generate_monthly_stats
-    end
-
-    private
-
-    def generate_monthly_stats
       current_month_rides.map do |date, rides_on_day|
         {
           day: formatted_date(date),
@@ -17,8 +11,10 @@ module Statistics
       end
     end
 
+    private
+
     def current_month_rides
-      RidesQuery.new.rides_monthly
+      RidesQuery.new.rides_monthly.order('date ASC').group_by(&:date)
     end
 
     def formatted_date(date)

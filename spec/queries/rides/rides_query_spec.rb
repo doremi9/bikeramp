@@ -85,26 +85,17 @@ describe RidesQuery, type: :query do
   end
 
   describe '#rides_monthly' do
-    it 'returns rides only made in current month grouped and ordered by date' do
+    it 'returns rides made in current month' do
       result = subject.rides_monthly
-      expect(result.keys).to eq([ride_20_days_ago.date, ride_8_days_ago.date,
-                                 ride_3_days_ago.date, ride_2_days_ago.date])
-      expect(result.values).to eq([
-                                    [ride_20_days_ago, ride_20_days_ago_2],
-                                    [ride_8_days_ago],
-                                    [ride_3_days_ago],
-                                    [ride_2_days_ago]
-                                  ])
+      expect(result).to include(
+        ride_2_days_ago, ride_3_days_ago, ride_8_days_ago, ride_20_days_ago,
+        ride_20_days_ago_2
+      )
     end
 
     it 'does not return rides made prior current month' do
       result = subject.rides_monthly
-      expect(result.keys).not_to include(
-        ride_25_days_ago.date, ride_3_months_ago.date
-      )
-      expect(result.values).not_to include(
-        ride_25_days_ago.date, ride_3_months_ago.date
-      )
+      expect(result).not_to include(ride_25_days_ago, ride_3_months_ago)
     end
   end
 end
