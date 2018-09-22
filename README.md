@@ -1,24 +1,40 @@
-# README
+# BIKERAMP
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## About
 
-Things you may want to cover:
+### Description
 
-* Ruby version
+It helps you track your rides during delivery of packages: how many kilometers you rode on each day and how much customer paid for delivery. The app will help you to control your work.
 
-* System dependencies
+### Technology stack
 
-* Configuration
+| Technology   | Version |
+| :----------- | :-----: |
+| Ruby         |  2.5.1  |
+| Rails        |  5.2.1  |
+| PostgreSQL   |   10.5  |
+| Grape        |  1.1.0  |
 
-* Database creation
+---
 
-* Database initialization
+## Project Setup
 
-* How to run the test suite
+### 1. Install dependencies
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+bundle install
+```
 
-* Deployment instructions
+### 2. Setup the database
+Create the database and populate it with with sample records
+```bash
+rails db:setup
+```
 
-* ...
+## API
+
+```bash
+POST /api/trips
+GET /api/stats/weekly
+GET /api/stats/monthly
+```
