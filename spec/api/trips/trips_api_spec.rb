@@ -19,6 +19,11 @@ describe 'TripsAPI', type: :request do
         }
       end
 
+      it 'responds with JSON' do
+        subject
+        expect(response.content_type).to eq('application/json')
+      end
+
       it 'creates a ride' do
         expect { subject }.to change { Ride.count }.from(0).to(1)
         expect(response).to be_successful
