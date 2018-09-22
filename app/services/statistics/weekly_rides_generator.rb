@@ -1,5 +1,5 @@
 module Statistics
-  class WeeklyRidesStatisticsGenerator
+  class WeeklyRidesGenerator
     def call
       {
         total_distance: total_distance,

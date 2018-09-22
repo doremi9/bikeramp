@@ -1,5 +1,5 @@
 module Statistics
-  class MonthlyRidesStatisticsGenerator
+  class MonthlyRidesGenerator
     def call
       generate_monthly_stats
     end

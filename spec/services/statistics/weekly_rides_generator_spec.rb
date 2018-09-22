@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Statistics::WeeklyRidesStatisticsGenerator, type: :service do
+describe Statistics::WeeklyRidesGenerator, type: :service do
   let!(:ride_2_days_ago) do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',

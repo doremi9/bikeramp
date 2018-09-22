@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Statistics::MonthlyRidesStatisticsGenerator, type: :service do
+describe Statistics::MonthlyRidesGenerator, type: :service do
   let(:date1) { 8.days.ago }
   let(:date2) { 10.days.ago }
   let(:date3) { 3.months.ago }
