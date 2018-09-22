@@ -13,7 +13,7 @@ module Statistics
 
     private
 
-    def current_month_rides
+    def current_month_rides_by_day
       RidesQuery.new.rides_monthly.order('date ASC').group_by(&:date)
     end
 
