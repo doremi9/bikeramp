@@ -18,7 +18,7 @@ module Statistics
     end
 
     def current_week_rides
-      @current_week_rides ||= RidesQuery.new.rides_weekly
+      RidesQuery.new.rides_weekly
     end
   end
 end

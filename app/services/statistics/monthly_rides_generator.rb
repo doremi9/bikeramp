@@ -18,7 +18,7 @@ module Statistics
     end
 
     def current_month_rides
-      @current_month_rides ||= RidesQuery.new.rides_monthly
+      RidesQuery.new.rides_monthly
     end
 
     def formatted_date(date)
