@@ -1,7 +1,7 @@
 module Statistics
   class MonthlyRidesGenerator
     def call
-      current_month_rides.map do |date, rides_on_day|
+      current_month_rides_by_day.map do |date, rides_on_day|
         {
           day: formatted_date(date),
           total_distance: total_distance(rides_on_day),
