@@ -1,21 +1,21 @@
 require 'rails_helper'
 
 describe 'StatisticsAPI', type: :request do
-  let!(:ride_2_days_ago) do
+  let!(:ride_today) do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Plac Europejski 1, Warszawa',
       price: 123.1,
-      date: "20.09.2018",
+      date: "25.09.2018",
       distance: 18
     )
   end
-  let!(:ride_3_days_ago) do
+  let!(:ride_1_day_ago) do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Marii Grzegorzewskiej 4, Warszawa',
       price: 42.9,
-      date: '19.09.2018',
+      date: '24.09.2018',
       distance: 25
     )
   end
@@ -38,6 +38,9 @@ describe 'StatisticsAPI', type: :request do
     )
   end
 
+  before { Timecop.freeze(Time.new(2018, 9, 25, 10, 30).utc) }
+  after { Timecop.return }
+
   shared_examples 'responds with JSON' do
     it 'responds with JSON' do
       subject
@@ -47,10 +50,10 @@ describe 'StatisticsAPI', type: :request do
 
   describe 'GET /api/stats/weekly' do
     let(:total_week_distance) do
-      [ride_3_days_ago, ride_2_days_ago].map(&:distance).sum
+      [ride_1_day_ago, ride_today].map(&:distance).sum
     end
     let(:total_week_price) do
-      [ride_3_days_ago, ride_2_days_ago].map(&:price).sum
+      [ride_1_day_ago, ride_today].map(&:price).sum
     end
 
     subject { get '/api/stats/weekly' }
@@ -90,13 +93,13 @@ describe 'StatisticsAPI', type: :request do
             'avg_price' => '83.92PLN'
           },
           {
-            'day' => 'September, 19th',
+            'day' => 'September, 24th',
             'total_distance' => '25km',
             'avg_ride' => '25km',
             'avg_price' => '42.9PLN'
           },
           {
-            'day' => 'September, 20th',
+            'day' => 'September, 25th',
             'total_distance' => '18km',
             'avg_ride' => '18km',
             'avg_price' => '123.1PLN'
