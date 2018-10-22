@@ -15,7 +15,7 @@ describe RidesQuery, type: :query do
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Marii Grzegorzewskiej 4, Warszawa',
       price: 123.22,
-      date: 1.day.ago,
+      date: Date.current,
       distance: 15
     )
   end
@@ -67,7 +67,7 @@ describe RidesQuery, type: :query do
 
   subject { described_class.new }
 
-  before { Timecop.freeze(Time.new(2018, 9, 25, 10, 30).utc) }
+  before { Timecop.freeze(Date.new(2018, 10, 22)) }
   after { Timecop.return }
 
   describe '#rides_weekly' do
