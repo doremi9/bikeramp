@@ -29,7 +29,7 @@ describe 'TripsAPI', type: :request do
         expect(response).to be_successful
         expect(response_attributes['start_address']).to eq(start_address)
         expect(response_attributes['destination_address']).to eq(destination_address)
-        expect(response_attributes['distance']).to eq(2)
+        expect(response_attributes['distance']).to eq(1)
         expect(response_attributes['price']).to eq(price)
         expect(response_attributes['date']).to eq('2018-09-20')
       end
@@ -55,7 +55,7 @@ describe 'TripsAPI', type: :request do
             start_address: 123,
             destination_address: 123,
             price: 'John Doe',
-            date: 123123
+            date: 1.23123
           }
         end
 
