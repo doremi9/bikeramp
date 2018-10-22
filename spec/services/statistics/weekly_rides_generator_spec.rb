@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe Statistics::WeeklyRidesGenerator, type: :service do
+  before { Timecop.freeze(Date.new(2018, 10, 24)) }
+  after { Timecop.return }
+
   let!(:ride_today) do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
@@ -36,9 +39,6 @@ describe Statistics::WeeklyRidesGenerator, type: :service do
   end
 
   subject { described_class.new }
-
-  before { Timecop.freeze(Time.new(2018, 9, 25, 10, 30).utc) }
-  after { Timecop.return }
 
   it 'calculates total distance made given week' do
     result = subject.call
