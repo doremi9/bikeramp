@@ -1,13 +1,17 @@
 require 'rails_helper'
 
 describe 'StatisticsAPI', type: :request do
+  let!(:user) do
+    User.create(email: 'email@mail.com', password: 'password', password_confirmation: 'password')
+  end
   let!(:ride_today) do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Plac Europejski 1, Warszawa',
       price: 123.1,
-      date: "25.09.2018",
-      distance: 18
+      date: '25.09.2018',
+      distance: 18,
+      user: user
     )
   end
   let!(:ride_1_day_ago) do
@@ -16,7 +20,8 @@ describe 'StatisticsAPI', type: :request do
       destination_address: 'Marii Grzegorzewskiej 4, Warszawa',
       price: 42.9,
       date: '24.09.2018',
-      distance: 25
+      distance: 25,
+      user: user
     )
   end
   let!(:ride_8_days_ago) do
@@ -25,7 +30,8 @@ describe 'StatisticsAPI', type: :request do
       destination_address: 'Rosoła 45, Warszawa',
       price: 83.92,
       date: '14.09.2018',
-      distance: 10
+      distance: 10,
+      user: user
     )
   end
   let!(:ride_20_days_ago) do
@@ -34,7 +40,8 @@ describe 'StatisticsAPI', type: :request do
       destination_address: 'Marii Grzegorzewskiej 4, Warszawa',
       price: 123.22,
       date: '02.09.2018',
-      distance: 15
+      distance: 15,
+      user: user
     )
   end
 
@@ -48,7 +55,7 @@ describe 'StatisticsAPI', type: :request do
     end
   end
 
-  describe 'GET /api/stats/weekly' do
+  describe 'GET /api/stats/current_week' do
     let(:total_week_distance) do
       [ride_1_day_ago, ride_today].map(&:distance).sum
     end
@@ -56,29 +63,27 @@ describe 'StatisticsAPI', type: :request do
       [ride_1_day_ago, ride_today].map(&:price).sum
     end
 
-    subject { get '/api/stats/weekly' }
+    subject { get '/api/stats/current_week', headers: auth_headers(user) }
 
     it_behaves_like 'responds with JSON'
 
     it 'returns total distance and total price made current week' do
       subject
-      expect(response.parsed_body).to eq(
-        {
-          'total_distance' => "#{total_week_distance}km",
-          'total_price' => "#{total_week_price}PLN"
-        }
+      expect(response_body).to eq(
+        'total_distance' => "#{total_week_distance}km",
+        'total_price' => "#{total_week_price}PLN"
       )
     end
   end
 
-  describe 'GET /api/stats/monthly' do
-    subject { get '/api/stats/monthly' }
+  describe 'GET /api/stats/current_month' do
+    subject { get '/api/stats/current_month', headers: auth_headers(user) }
 
     it_behaves_like 'responds with JSON'
 
     it 'returns day, total distance, average ride and average price made current month' do
       subject
-      expect(response.parsed_body).to eq(
+      expect(response_body).to eq(
         [
           {
             'day' => 'September, 2nd',
