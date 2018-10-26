@@ -1,5 +1,8 @@
 module Statistics
   class Base < API::Core
-    mount StatisticsAPI
+    resources :stats do
+      before { authenticate_user! }
+      mount StatisticsAPI
+    end
   end
 end

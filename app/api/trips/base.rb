@@ -1,5 +1,8 @@
 module Trips
   class Base < API::Core
-    mount TripsAPI
+    resources :trips do
+      before { authenticate_user! }
+      mount TripsAPI
+    end
   end
 end
