@@ -1,16 +1,20 @@
 require 'rails_helper'
 
-describe Statistics::MonthlyRidesGenerator, type: :service do
+describe Statistics::CurrentMonthRidesGenerator, type: :service do
   before { Timecop.freeze(Date.new(2018, 10, 24)) }
   after { Timecop.return }
 
+  let!(:user) do
+    User.create(email: 'email@mail.com', password: 'password', password_confirmation: 'password')
+  end
   let!(:ride_same_day_1) do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Plac Europejski 1, Warszawa',
       price: 123.21,
       date: Date.current,
-      distance: 10
+      distance: 10,
+      user: user
     )
   end
   let!(:ride_same_day_2) do
@@ -19,7 +23,8 @@ describe Statistics::MonthlyRidesGenerator, type: :service do
       destination_address: 'Plac Europejski 1, Warszawa',
       price: 123.21,
       date: Date.current,
-      distance: 10
+      distance: 10,
+      user: user
     )
   end
   let!(:ride_another_day_1) do
@@ -28,7 +33,8 @@ describe Statistics::MonthlyRidesGenerator, type: :service do
       destination_address: 'Marii Grzegorzewskiej 4, Warszawa',
       price: 123.22,
       date: 2.weeks.ago,
-      distance: 15
+      distance: 15,
+      user: user
     )
   end
   let!(:ride_another_day_2) do
@@ -37,7 +43,8 @@ describe Statistics::MonthlyRidesGenerator, type: :service do
       destination_address: 'Marii Grzegorzewskiej 4, Warszawa',
       price: 123.22,
       date: 2.weeks.ago,
-      distance: 15
+      distance: 15,
+      user: user
     )
   end
   let!(:ride_2_months_ago) do
@@ -46,7 +53,8 @@ describe Statistics::MonthlyRidesGenerator, type: :service do
       destination_address: 'Rosoła 45, Warszawa',
       price: 123.11,
       date: 2.months.ago,
-      distance: 15
+      distance: 15,
+      user: user
     )
   end
   let(:avg_price_1) do
@@ -56,7 +64,7 @@ describe Statistics::MonthlyRidesGenerator, type: :service do
     ([ride_another_day_1, ride_another_day_2].map(&:price).sum / 2).to_f
   end
 
-  subject { described_class.new }
+  subject { described_class.new(user) }
 
   it 'returns a list of calculated statistics with proper data' do
     result = subject.call

@@ -1,7 +1,11 @@
 module Statistics
-  class MonthlyRidesGenerator
+  class CurrentMonthRidesGenerator
+    def initialize(current_user)
+      @current_user = current_user
+    end
+    
     def call
-      current_month_rides_by_day.map do |date, rides_on_day|
+      user_current_month_rides_by_day.map do |date, rides_on_day|
         {
           day: formatted_date(date),
           total_distance: total_distance(rides_on_day),
@@ -13,8 +17,8 @@ module Statistics
 
     private
 
-    def current_month_rides_by_day
-      RidesQuery.new.rides_monthly.order('date ASC').group_by(&:date)
+    def user_current_month_rides_by_day
+      @current_user.monthly_rides.order('date ASC').group_by(&:date)
     end
 
     def formatted_date(date)
