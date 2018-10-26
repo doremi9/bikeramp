@@ -30,4 +30,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  authorization:
+    invalid_token: 'Authentication failed: invalid token'
+    unauthenticated: 'You must be logged in before continuing'
+    invalid_credentials: 'Invalid username or password'
