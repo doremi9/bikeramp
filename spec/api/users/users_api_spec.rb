@@ -22,7 +22,7 @@ describe 'UsersAPI', type: :request do
       let(:last_name) { 'Doe' }
 
       it 'creates a user' do
-        expect { subject }.to change { User.count }.by(1)
+        expect { subject }.to change(User, :count).by(1)
         expect(response.status).to eq(200)
       end
     end

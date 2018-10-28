@@ -96,14 +96,16 @@ describe Ride, type: :model do
 
     describe '.weekly scope' do
       it 'returns current week rides' do
-        expect(described_class.weekly).to include(ride_this_week1, ride_this_week2)
+        expect(described_class.weekly)
+          .to contain_exactly(ride_this_week1, ride_this_week2)
         expect(described_class.weekly).not_to include(ride_previous_week)
       end
     end
 
     describe '.monthly scope' do
       it 'returns current month rides' do
-        expect(described_class.monthly).to include(ride_this_week1, ride_this_week2, ride_previous_week)
+        expect(described_class.monthly)
+          .to contain_exactly(ride_this_week1, ride_this_week2, ride_previous_week)
         expect(described_class.monthly).not_to include(ride_previous_month)
       end
     end
