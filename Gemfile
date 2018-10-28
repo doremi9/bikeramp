@@ -3,14 +3,18 @@ git_source(:github) { |_repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+gem 'activeadmin'
+gem 'bootstrap', '~> 4.1.3'
 gem 'devise'
 gem 'geocoder'
 gem 'grape'
+gem 'jquery-rails'
 gem 'jwt'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 5.2.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

@@ -27,4 +27,5 @@ params = {
   Rides::CreateRide.new(params, users.sample).call
 end
 
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 puts 'Seeds done.'
