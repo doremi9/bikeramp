@@ -8,7 +8,7 @@ class ConfirmationsController < Devise::ConfirmationsController
       send_welcome_email
       respond_with_navigational(resource) { redirect_to front_end_host }
     else
-      respond_with_navigational(resource.errors, status: :unprocessable_entity) { redirect_to 'http://localhost:8080' }
+      respond_with_navigational(resource.errors, status: :unprocessable_entity) { redirect_to front_end_host }
     end
   end
 
