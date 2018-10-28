@@ -34,7 +34,17 @@ rails db:setup
 ## API
 
 ```bash
+
 POST /api/trips
+GET /api/trips
+PATCH /api/trips/:id
+DELETE /api/trips/:id
+
+POST /api/users
+POST /api/users/login
+
+GET /api/stats/current_week
+GET /api/stats/current_month
 GET /api/stats/weekly
 GET /api/stats/monthly
 ```
