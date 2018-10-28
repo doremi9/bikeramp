@@ -4,16 +4,7 @@ Rails.application.configure do
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
-  # ActionMailer::Base.logger = Logger.new(STDOUT)
-  # ActionMailer::Base.logger.level = Logger::DEBUG
-  # ActionMailer::Base.smtp_settings = {
-  #   address:              'smtp.sendgrid.net',
-  #   port:                 25,
-  #   user_name:            'jedrekdomanski',
-  #   password:             'Jedrek123',
-  #   authentication:       :plain,
-  #   enable_starttls_auto: true
-  # }
+
   config.cache_classes = false
   # ActionMailer configuration for Sendgrid
   config.action_mailer.raise_delivery_errors = true
