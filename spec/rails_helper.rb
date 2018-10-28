@@ -50,7 +50,7 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
-
+  
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
   config.include(Shoulda::Matchers::ActiveModel, type: :model)
@@ -64,3 +64,25 @@ Shoulda::Matchers.configure do |config|
   end
 end
 ActiveJob::Base.queue_adapter = :test
+
+Geocoder.configure(lookup: :test, ip_lookup: :test)
+Geocoder::Lookup::Test.add_stub(
+  'Plac Europejski 2, Warszawa', [
+    {
+      'coordinates'  => [40.7143528, -74.0059731],
+      'address'      => 'Plac Europejski 2, Warszawa',
+      'country'      => 'Poland',
+      'country_code' => 'PL'
+    }
+  ]
+)
+Geocoder::Lookup::Test.add_stub(
+  'Aleje Jerozolimskie 10, Warszawa', [
+    {
+      'coordinates'  => [145.964, 89.263],
+      'address'      => 'Aleje Jerozolimskie 10, Warszawa',
+      'country'      => 'Poland',
+      'country_code' => 'PL'
+    }
+  ]
+)
