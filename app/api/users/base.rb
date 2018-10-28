@@ -1,5 +1,7 @@
 module Users
   class Base < API::Core
-    mount UsersAPI
+    resources :users do
+      mount UsersAPI
+    end
   end
 end

@@ -12,33 +12,30 @@ module Users
       end
     end
 
-    resources :users do
-      params do
-        use :user_params
+    desc 'Creates new user'
+    params do
+      use :user_params
+    end
+    post do
+      result = Users::CreateService.new(params).call
+      if result.success?
+        status :ok
+      else
+        error!({ message: result.message }, 422)
       end
+    end
 
-      desc 'Creates new user'
-      post do
-        result = Users::CreateService.new(params).call
-        if result.success?
-          status :ok
-        else
-          error!({ message: result.message }, 422)
-        end
-      end
-
-      desc 'Generate jwt for user'
-      params do
-        requires :email, desc: 'Email', type: String
-        requires :password, desc: 'User password', type: String
-      end
-      post '/login' do
-        user = User.find_by(email: params[:email])
-        error!(I18n.t('authorization.invalid_credentials'), 403) unless user.present?
-        error!(I18n.t('authorization.invalid_credentials'), 403) unless user.valid_password?(params[:password])
-        token = JsonWebToken.issue_token(user_id: user.id)
-        { api_token: token }
-      end
+    desc 'Login user'
+    params do
+      requires :email, desc: 'Email', type: String
+      requires :password, desc: 'User password', type: String
+    end
+    post '/login' do
+      user = User.find_by(email: params[:email])
+      error!(I18n.t('authorization.invalid_credentials'), 403) unless user.present?
+      error!(I18n.t('authorization.invalid_credentials'), 403) unless user.valid_password?(params[:password])
+      token = JsonWebToken.issue_token(user_id: user.id)
+      { api_token: token }
     end
   end
 end
