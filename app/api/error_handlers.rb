@@ -2,6 +2,9 @@ module ErrorHandlers
   extend ActiveSupport::Concern
 
   included do
+    rescue_from ActiveRecord::RecordNotFound do
+      error!('Record not found', 404)
+    end
     rescue_from :all do |e|
       # When required params are missing or validation fails
       if e.class.name == 'Grape::Exceptions::ValidationErrors'
@@ -10,11 +13,6 @@ module ErrorHandlers
       elsif e.class.name == 'CanCan::AccessDenied'
         error!('You don\'t have permissions.', 403)
 
-      # Record not found
-      elsif e.class.name == ActiveRecord::RecordNotFound
-        error!(e.message, 404)
-
-      # When all hell broke loose
       else
         Rails.logger.error "\n#{e.class.name} (#{e.message}):"
         e.backtrace.each { |line| Rails.logger.error line }
