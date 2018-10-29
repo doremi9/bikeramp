@@ -54,6 +54,7 @@ describe Ride, type: :model do
   end
 
   describe 'Scopes' do
+    before { Timecop.freeze(Time.new(2018, 10, 26, 10, 30).utc) }
     let!(:ride_this_week1) do
       Ride.create!(
         date: Date.current,
@@ -91,7 +92,6 @@ describe Ride, type: :model do
       )
     end
 
-    before { Timecop.freeze(Time.new(2018, 10, 26, 10, 30).utc) }
     after { Timecop.return }
 
     describe '.weekly scope' do
