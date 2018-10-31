@@ -22,6 +22,13 @@ group :development, :test do
 end
 
 group :development do
+  # Capistrano gems
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-passenger'
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
+
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'letter_opener'

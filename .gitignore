@@ -23,3 +23,6 @@
 
 Guardfile
 /spec/examples.txt
+
+config/database.yml
+config/secrets.yml
