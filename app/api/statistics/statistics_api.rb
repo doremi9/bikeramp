@@ -2,7 +2,7 @@ module Statistics
   class StatisticsAPI < Base
     desc 'Returns rides from current week for user'
     get '/current_week' do
-      Statistics::CurrentWeekRidesGenerator.new(current_user).call
+      current_user.weekly_rides.order(date: 'asc')
     end
 
     desc 'Returns rides from current month for user'
@@ -12,12 +12,16 @@ module Statistics
 
     desc "Returns all user's rides grouped by week"
     get '/weekly' do
-      current_user.rides.order(date: 'asc').group_by { |ride| ride.date.beginning_of_week }
+      current_user.rides.order(date: 'asc').group_by do |ride|
+        ride.date.beginning_of_week
+      end
     end
 
     desc "Returns all user's rides grouped by month"
     get '/monthly' do
-      current_user.rides.order(date: 'asc').group_by { |ride| ride.date.strftime('%B, %Y') }
+      current_user.rides.order(date: 'asc').group_by do |ride|
+        ride.date.strftime('%B, %Y')
+      end
     end
   end
 end

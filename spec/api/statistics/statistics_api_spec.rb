@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 describe 'StatisticsAPI', type: :request do
+  before { Timecop.freeze(Time.new(2018, 9, 25, 10, 30).utc) }
+
   let!(:user) do
     User.create(
       email: 'email@mail.com',
@@ -51,7 +53,6 @@ describe 'StatisticsAPI', type: :request do
     )
   end
 
-  before { Timecop.freeze(Time.new(2018, 9, 25, 10, 30).utc) }
   after { Timecop.return }
 
   describe 'GET /api/stats/current_week' do
@@ -72,8 +73,24 @@ describe 'StatisticsAPI', type: :request do
       it 'returns total distance and total price made current week' do
         subject
         expect(response_body).to eq(
-          'total_distance' => "#{total_week_distance}km",
-          'total_price' => "#{total_week_price}PLN"
+          [{
+            'id' => ride_1_day_ago.id,
+            'start_address' => ride_1_day_ago.start_address,
+            'destination_address' => ride_1_day_ago.destination_address,
+            'distance' => ride_1_day_ago.distance,
+            'price' => ride_1_day_ago.price.to_f.to_s,
+            'date' => ride_1_day_ago.date.strftime('%Y-%m-%d'),
+            'user_id' => user.id
+          },
+          {
+            'id' => ride_today.id,
+            'start_address' => ride_today.start_address,
+            'destination_address' => ride_today.destination_address,
+            'distance' => ride_today.distance,
+            'price' => ride_today.price.to_f.to_s,
+            'date' => ride_today.date.strftime('%Y-%m-%d'),
+            'user_id' => user.id
+          }]
         )
       end
     end
