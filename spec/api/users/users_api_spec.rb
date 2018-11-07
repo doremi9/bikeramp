@@ -62,9 +62,12 @@ describe 'UsersAPI', type: :request do
       let(:email) { 'qwe@qwe.qwe' }
       let(:password) { 'secret_password' }
 
-      it 'generates JWT token' do
+      include_examples '201'
+
+      it 'returns a token a user' do
         subject
-        expect(response.status).to eq(201)
+        expect(response_body).to have_key('api_token')
+        expect(response_body).to have_key('user')
       end
     end
     context 'with invalid params' do
@@ -72,7 +75,7 @@ describe 'UsersAPI', type: :request do
         let(:email) { 'qwe@qwe.com' }
         let(:password) { 'secret_password' }
 
-        it 'does not generate JWT token' do
+        it 'returns 403 status code' do
           subject
           expect(response.status).to eq(403)
           expect(response_body).to eq('error' => I18n.t('authorization.invalid_credentials'))

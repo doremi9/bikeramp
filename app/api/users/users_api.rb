@@ -35,7 +35,7 @@ module Users
       error!(I18n.t('authorization.invalid_credentials'), 403) unless user.present?
       error!(I18n.t('authorization.invalid_credentials'), 403) unless user.valid_password?(params[:password])
       token = JsonWebToken.issue_token(user_id: user.id)
-      { api_token: token }
+      { api_token: token, user: user }
     end
   end
 end
