@@ -22,7 +22,7 @@ module Trips
     post do
       result = Rides::CreateRide.new(params, current_user).call
       if result.success?
-        { data: result.data }
+        result.data
       else
         error!({ message: result.message }, 403)
       end
