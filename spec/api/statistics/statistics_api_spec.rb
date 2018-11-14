@@ -78,7 +78,7 @@ describe 'StatisticsAPI', type: :request do
             'start_address' => ride_1_day_ago.start_address,
             'destination_address' => ride_1_day_ago.destination_address,
             'distance' => ride_1_day_ago.distance,
-            'price' => ride_1_day_ago.price.to_f.to_s,
+            'price' => ride_1_day_ago.price.to_f,
             'date' => ride_1_day_ago.date.strftime('%Y-%m-%d'),
             'user_id' => user.id
           },
@@ -87,7 +87,7 @@ describe 'StatisticsAPI', type: :request do
             'start_address' => ride_today.start_address,
             'destination_address' => ride_today.destination_address,
             'distance' => ride_today.distance,
-            'price' => ride_today.price.to_f.to_s,
+            'price' => ride_today.price.to_f,
             'date' => ride_today.date.strftime('%Y-%m-%d'),
             'user_id' => user.id
           }]

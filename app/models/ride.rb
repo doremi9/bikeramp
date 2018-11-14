@@ -12,7 +12,8 @@ class Ride < ApplicationRecord
       destination_address: self.destination_address,
       distance: self.distance,
       price: self.price.to_f,
-      date: self.date
+      date: self.date,
+      user_id: self.user.id
     }
   end
 end
