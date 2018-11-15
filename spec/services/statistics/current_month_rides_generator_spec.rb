@@ -57,8 +57,14 @@ describe Statistics::CurrentMonthRidesGenerator, type: :service do
       user: user
     )
   end
+  let(:total_price_1) do
+    [ride_same_day_1, ride_same_day_2].map(&:price).sum
+  end
   let(:avg_price_1) do
     ([ride_same_day_1, ride_same_day_2].map(&:price).sum / 2).to_f
+  end
+  let(:total_price_2) do
+    [ride_another_day_1, ride_another_day_2].map(&:price).sum
   end
   let(:avg_price_2) do
     ([ride_another_day_1, ride_another_day_2].map(&:price).sum / 2).to_f
@@ -73,13 +79,15 @@ describe Statistics::CurrentMonthRidesGenerator, type: :service do
       day: 'October, 10th',
       total_distance: '30km',
       avg_ride: '15km',
-      avg_price: "#{avg_price_2}PLN"
+      avg_price: "#{avg_price_2}PLN",
+      total_price: total_price_2
     )
     expect(result.second).to eq(
       day: 'October, 24th',
       total_distance: '20km',
       avg_ride: '10km',
-      avg_price: "#{avg_price_1}PLN"
+      avg_price: "#{avg_price_1}PLN",
+      total_price: total_price_1
     )
   end
 end

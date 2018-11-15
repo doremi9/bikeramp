@@ -10,7 +10,8 @@ module Statistics
           day: formatted_date(date),
           total_distance: total_distance(rides_on_day),
           avg_ride: avg_ride(rides_on_day),
-          avg_price: avg_price(rides_on_day)
+          avg_price: avg_price(rides_on_day),
+          total_price: total_price(rides_on_day)
         }
       end
     end

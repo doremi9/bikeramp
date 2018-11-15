@@ -118,25 +118,29 @@ describe 'StatisticsAPI', type: :request do
               'day' => 'September, 2nd',
               'total_distance' => '15km',
               'avg_ride' => '15km',
-              'avg_price' => '123.22PLN'
+              'avg_price' => '123.22PLN',
+              'total_price' => '123.22'
             },
             {
               'day' => 'September, 14th',
               'total_distance' => '10km',
               'avg_ride' => '10km',
-              'avg_price' => '83.92PLN'
+              'avg_price' => '83.92PLN',
+              'total_price' => '83.92'
             },
             {
               'day' => 'September, 24th',
               'total_distance' => '25km',
               'avg_ride' => '25km',
-              'avg_price' => '42.9PLN'
+              'avg_price' => '42.9PLN',
+              'total_price' =>'42.9'
             },
             {
               'day' => 'September, 25th',
               'total_distance' => '18km',
               'avg_ride' => '18km',
-              'avg_price' => '123.1PLN'
+              'avg_price' => '123.1PLN',
+              'total_price' => '123.1'
             }
           ]
         )
