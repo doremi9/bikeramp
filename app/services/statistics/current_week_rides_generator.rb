@@ -18,7 +18,7 @@ module Statistics
     end
 
     def total_price
-      "#{user_current_week_rides.map(&:price).sum}PLN"
+      "#{user_current_week_rides.map(&:price).sum.to_f}PLN"
     end
 
     def user_current_week_rides

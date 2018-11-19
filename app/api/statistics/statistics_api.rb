@@ -19,9 +19,7 @@ module Statistics
 
     desc "Returns all user's rides grouped by month"
     get '/monthly' do
-      current_user.rides.order(date: 'asc').group_by do |ride|
-        ride.date.strftime('%B, %Y')
-      end
+      Statistics::MonthlyRidesGenerator.new(current_user).call
     end
   end
 end

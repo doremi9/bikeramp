@@ -3,7 +3,7 @@ module Rides
     def initialize(params, user)
       @start_address = params[:start_address]
       @destination_address = params[:destination_address]
-      @price = params[:price]
+      @price = params[:price_cents]
       @date = params[:date]
       @user = user
     end
@@ -12,7 +12,7 @@ module Rides
       ride = Ride.new(
         start_address: @start_address,
         destination_address: @destination_address,
-        price: @price,
+        price_cents: @price,
         date: @date,
         user: @user,
         distance: Rides::DistanceCalculator.calculate(@start_address, @destination_address)

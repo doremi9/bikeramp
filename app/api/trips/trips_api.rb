@@ -4,7 +4,7 @@ module Trips
       params :trips_params do
         requires :start_address, type: String
         requires :destination_address, type: String
-        requires :price, type: Float
+        requires :price_cents, type: Float
         requires :date, type: Date
       end
     end
@@ -32,7 +32,7 @@ module Trips
     params do
       optional :start_address, type: String
       optional :destination_address, type: String
-      optional :price, type: Float
+      optional :price_cents, type: Float
       optional :date, type: Date
     end
     patch '/:id' do
