@@ -20,6 +20,7 @@ module Statistics
         FROM Rides
         WHERE user_id = #{@current_user.id}
         GROUP BY month
+        ORDER BY month
       SQL
     end
   end
