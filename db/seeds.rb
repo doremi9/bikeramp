@@ -20,7 +20,7 @@ prices = [23.99, 18.2, 99.9]
 params = {
   start_address: start_addresses.sample,
   destination_address: destination_addresses.sample,
-  price: prices.sample,
+  price_cents: prices.sample,
   date: dates.sample
 }
 20.times do

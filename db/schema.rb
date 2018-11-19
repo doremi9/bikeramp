@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_28_131429) do
+ActiveRecord::Schema.define(version: 2018_11_18_120215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2018_10_28_131429) do
     t.string "start_address"
     t.string "destination_address"
     t.integer "distance"
-    t.decimal "price", precision: 10, scale: 2
+    t.float "price_cents", default: 0.0
     t.date "date"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_rides_on_user_id"
