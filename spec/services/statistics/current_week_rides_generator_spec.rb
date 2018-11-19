@@ -41,7 +41,7 @@ describe Statistics::CurrentWeekRidesGenerator, type: :service do
     [ride_today, ride_1_day_ago].map(&:distance).sum
   end
   let(:total_price_current_week) do
-    [ride_today, ride_1_day_ago].map(&:price).sum
+    [ride_today, ride_1_day_ago].map(&:price).sum.to_f
   end
 
   subject { described_class.new(user) }

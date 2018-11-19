@@ -14,7 +14,7 @@ describe 'UsersAPI', type: :request do
 
     subject { post '/api/users', params: params }
 
-    context 'valid params' do
+    context 'with valid params' do
       let(:email) { 'qwe@qwe.qwe' }
       let(:password) { 'secret_password' }
       let(:password_confirmation) { 'secret_password' }
@@ -64,7 +64,7 @@ describe 'UsersAPI', type: :request do
 
       include_examples '201'
 
-      it 'returns a token a user' do
+      it 'returns a token for a user' do
         subject
         expect(response_body).to have_key('api_token')
         expect(response_body).to have_key('user')

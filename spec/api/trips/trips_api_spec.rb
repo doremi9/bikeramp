@@ -26,7 +26,7 @@ describe 'TripsAPI', type: :request do
           {
             start_address: start_address,
             destination_address: destination_address,
-            price: price,
+            price_cents: price,
             date: date
           }
         end
@@ -57,7 +57,7 @@ describe 'TripsAPI', type: :request do
             {
               start_address: 123,
               destination_address: 123,
-              price: 'John Doe',
+              price_cents: 'John Doe',
               date: 'ABCDEFGH'
             }
           end
@@ -71,7 +71,7 @@ describe 'TripsAPI', type: :request do
         {
           start_address: start_address,
           destination_address: destination_address,
-          price: price,
+          price_cents: price,
           date: date
         }
       end
@@ -88,7 +88,7 @@ describe 'TripsAPI', type: :request do
         Ride.create(
           start_address: 'Plac Europejski 2, Warszawa',
           destination_address: 'Aleje Jerozolimskie 10, Warszawa',
-          price: 100,
+          price_cents: 100,
           date: '2018-10-20',
           user: user
         )
@@ -97,7 +97,7 @@ describe 'TripsAPI', type: :request do
         Ride.create(
           start_address: 'Plac Europejski 2, Warszawa',
           destination_address: 'Aleje Jerozolimskie 10, Warszawa',
-          price: 80,
+          price_cents: 80,
           date: '2018-10-10',
           user: user
         )
@@ -116,7 +116,7 @@ describe 'TripsAPI', type: :request do
     end
 
     context 'when user is not authenticated' do
-      include_examples 'Unauthenticated' 
+      include_examples 'Unauthenticated'
     end
   end
 
@@ -125,7 +125,7 @@ describe 'TripsAPI', type: :request do
       Ride.create(
         start_address: 'Plac Europejski 2, Warszawa',
         destination_address: 'Aleje Jerozolimskie 10, Warszawa',
-        price: 80,
+        price_cents: 80,
         date: '2018-10-10',
         user: user
       )
@@ -182,7 +182,7 @@ describe 'TripsAPI', type: :request do
           Ride.create(
             start_address: 'Plac Europejski 2, Warszawa',
             destination_address: 'Aleje Jerozolimskie 10, Warszawa',
-            price: 80,
+            price_cents: 80,
             date: '2018-10-10',
             user: user
           )
