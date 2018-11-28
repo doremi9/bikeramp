@@ -11,7 +11,7 @@ describe Statistics::CurrentMonthRidesGenerator, type: :service do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Plac Europejski 1, Warszawa',
-      price_cents: 123.21,
+      price: 123.21,
       date: Date.current,
       distance: 10,
       user: user
@@ -21,7 +21,7 @@ describe Statistics::CurrentMonthRidesGenerator, type: :service do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Plac Europejski 1, Warszawa',
-      price_cents: 123.21,
+      price: 123.21,
       date: Date.current,
       distance: 10,
       user: user
@@ -31,7 +31,7 @@ describe Statistics::CurrentMonthRidesGenerator, type: :service do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Marii Grzegorzewskiej 4, Warszawa',
-      price_cents: 123.22,
+      price: 123.22,
       date: 2.weeks.ago,
       distance: 15,
       user: user
@@ -41,7 +41,7 @@ describe Statistics::CurrentMonthRidesGenerator, type: :service do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Marii Grzegorzewskiej 4, Warszawa',
-      price_cents: 123.22,
+      price: 123.22,
       date: 2.weeks.ago,
       distance: 15,
       user: user
@@ -51,23 +51,23 @@ describe Statistics::CurrentMonthRidesGenerator, type: :service do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Rosoła 45, Warszawa',
-      price_cents: 123.11,
+      price: 123.11,
       date: 2.months.ago,
       distance: 15,
       user: user
     )
   end
   let(:total_price_1) do
-    [ride_same_day_1, ride_same_day_2].map(&:price_cents).sum
+    [ride_same_day_1, ride_same_day_2].map(&:price).sum.to_f
   end
   let(:avg_price_1) do
-    ([ride_same_day_1, ride_same_day_2].map(&:price_cents).sum / 2).to_f
+    ([ride_same_day_1, ride_same_day_2].map(&:price).sum / 2).to_f
   end
   let(:total_price_2) do
-    [ride_another_day_1, ride_another_day_2].map(&:price_cents).sum
+    [ride_another_day_1, ride_another_day_2].map(&:price).sum.to_f
   end
   let(:avg_price_2) do
-    ([ride_another_day_1, ride_another_day_2].map(&:price_cents).sum / 2).to_f
+    ([ride_another_day_1, ride_another_day_2].map(&:price).sum / 2).to_f
   end
 
   subject { described_class.new(user) }

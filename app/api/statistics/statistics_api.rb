@@ -2,7 +2,17 @@ module Statistics
   class StatisticsAPI < Base
     desc 'Returns rides from current week for user'
     get '/current_week' do
-      current_user.weekly_rides.order(date: 'asc')
+      rides = current_user.weekly_rides.order(date: 'asc')
+      rides.map do |ride|
+        { 
+          id: ride.id,
+          start_address: ride.start_address,
+          destination_address: ride.destination_address,
+          distance: ride.distance,
+          price: ride.price.to_f,
+          date: ride.date
+        }
+      end
     end
 
     desc 'Returns rides from current month for user'

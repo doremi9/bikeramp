@@ -16,7 +16,7 @@ describe 'StatisticsAPI', type: :request do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Plac Europejski 1, Warszawa',
-      price_cents: 123.1,
+      price: 123.1,
       date: '25.09.2018',
       distance: 18,
       user: user
@@ -26,7 +26,7 @@ describe 'StatisticsAPI', type: :request do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Marii Grzegorzewskiej 4, Warszawa',
-      price_cents: 42.9,
+      price: 42.9,
       date: '24.09.2018',
       distance: 25,
       user: user
@@ -36,7 +36,7 @@ describe 'StatisticsAPI', type: :request do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Rosoła 45, Warszawa',
-      price_cents: 83.92,
+      price: 83.92,
       date: '14.09.2018',
       distance: 10,
       user: user
@@ -46,7 +46,7 @@ describe 'StatisticsAPI', type: :request do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Marii Grzegorzewskiej 4, Warszawa',
-      price_cents: 123.22,
+      price: 123.22,
       date: '02.09.2018',
       distance: 15,
       user: user
@@ -64,7 +64,7 @@ describe 'StatisticsAPI', type: :request do
         [ride_1_day_ago, ride_today].map(&:distance).sum
       end
       let(:total_week_price) do
-        [ride_1_day_ago, ride_today].map(&:price_cents).sum
+        [ride_1_day_ago, ride_today].map(&:price).sum.to_f
       end
 
       include_examples 'responds with JSON'
@@ -78,18 +78,16 @@ describe 'StatisticsAPI', type: :request do
             'start_address' => ride_1_day_ago.start_address,
             'destination_address' => ride_1_day_ago.destination_address,
             'distance' => ride_1_day_ago.distance,
-            'price_cents' => ride_1_day_ago.price_cents.to_f,
-            'date' => ride_1_day_ago.date.strftime('%Y-%m-%d'),
-            'user_id' => user.id
+            'price' => ride_1_day_ago.price.to_f,
+            'date' => ride_1_day_ago.date.strftime('%Y-%m-%d')
           },
           {
             'id' => ride_today.id,
             'start_address' => ride_today.start_address,
             'destination_address' => ride_today.destination_address,
             'distance' => ride_today.distance,
-            'price_cents' => ride_today.price_cents.to_f,
-            'date' => ride_today.date.strftime('%Y-%m-%d'),
-            'user_id' => user.id
+            'price' => ride_today.price.to_f,
+            'date' => ride_today.date.strftime('%Y-%m-%d')
           }]
         )
       end
