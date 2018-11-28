@@ -9,7 +9,7 @@ module Statistics
           start_address: ride.start_address,
           destination_address: ride.destination_address,
           distance: ride.distance,
-          price: ride.price.to_f,
+          price: ride.price_cents.to_f,
           date: ride.date
         }
       end
