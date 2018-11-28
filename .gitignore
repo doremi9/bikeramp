@@ -17,6 +17,7 @@
 /storage/*
 
 .byebug_history
+.rubocop.yml
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
@@ -26,3 +27,5 @@ Guardfile
 
 config/database.yml
 config/secrets.yml
+
+tags
