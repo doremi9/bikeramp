@@ -19,6 +19,6 @@ class ConfirmationsController < Devise::ConfirmationsController
   end
 
   def front_end_host
-    Rails.end.development? ? 'http://localhost:8080/login' : ENV['FRONTEND_HOST_LOGIN']
+    Rails.env.development? ? 'http://localhost:8080/login' : ENV['FRONTEND_HOST_LOGIN']
   end
 end
