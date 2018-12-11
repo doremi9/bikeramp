@@ -39,7 +39,7 @@ module Statistics
     end
 
     def total_price(rides)
-      rides.map(&:price).sum.to_f
+      rides.map(&:price_cents).sum.to_f
     end
 
     def avg_price(rides)
