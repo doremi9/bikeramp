@@ -1,22 +1,23 @@
 module Users
   class CreateService < ApplicationService
     def initialize(params)
-      @email = params[:email]
-      @password = params[:password]
-      @password_confirmation = params[:password_confirmation]
-      @first_name = params[:first_name]
-      @last_name = params[:last_name]
+      @params = params
     end
 
     def call
       user = User.new(
-        email: @email,
-        password: @password,
-        password_confirmation: @password_confirmation,
-        first_name: @first_name,
-        last_name: @last_name
+        email: params[:email],
+        password: params[:password],
+        password_confirmation: params[:password_confirmation],
+        first_name: params[:first_name],
+        last_name: params[:last_name],
+        avatar: File.open('app/assets/images/fallback/default.jpg')
       )
       user.save ? success(data: user) : failure(data: user, message: user.errors.full_messages)
     end
+
+    private
+
+    attr_reader :params
   end
 end
