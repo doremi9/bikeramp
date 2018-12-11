@@ -3,6 +3,7 @@ user1 = User.create(email: 'qwe@qwe.qwe', password: 'password', password_confirm
 user2 = User.create(email: 'some@email.com', password: 'password', password_confirmation: 'password')
 user3 = User.create(email: 'another_email@sample.com', password: 'password', password_confirmation: 'password')
 users = [user1, user2, user3]
+users.map(&:confirm)
 dates = [1.day.ago, 2.days.ago, 3.days.ago, 1.month.ago, 2.months.ago]
 start_addresses = [
   'Aleje Jerozolimskie 10, Warszawa',
