@@ -3,6 +3,9 @@ class User < ApplicationRecord
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
+
+  mount_uploader :avatar, AvatarUploader
+  
   has_many :rides
   has_many :weekly_rides, -> { weekly }, class_name: 'Ride', inverse_of: :user
   has_many :monthly_rides, -> { monthly }, class_name: 'Ride', inverse_of: :user
