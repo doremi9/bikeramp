@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Users::CreateService, type: :service do
   include ActiveJob::TestHelper
 
-  let(:attribtues) do
+  let(:attributes) do
     {
       email: email,
       password: password,
@@ -11,9 +11,9 @@ describe Users::CreateService, type: :service do
     }
   end
 
-  subject { described_class.new(attribtues) }
+  subject { described_class.new(attributes) }
 
-  context 'valid attribtues' do
+  context 'valid attributes' do
     let(:email) { 'some@email.com' }
     let(:password) { 'password' }
     let(:password_confirmation) { 'password' }
@@ -32,7 +32,7 @@ describe Users::CreateService, type: :service do
     end
   end
 
-  context 'invalid attribtues' do
+  context 'invalid attributes' do
     let(:email) {}
     let(:password) {}
     let(:password_confirmation) {}
