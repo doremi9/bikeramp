@@ -16,7 +16,7 @@ describe 'StatisticsAPI', type: :request do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Plac Europejski 1, Warszawa',
-      price: 123.1,
+      price_cents: 123.1,
       date: '25.09.2018',
       distance: 18,
       user: user
@@ -26,7 +26,7 @@ describe 'StatisticsAPI', type: :request do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Marii Grzegorzewskiej 4, Warszawa',
-      price: 42.9,
+      price_cents: 42.9,
       date: '24.09.2018',
       distance: 25,
       user: user
@@ -36,7 +36,7 @@ describe 'StatisticsAPI', type: :request do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Rosoła 45, Warszawa',
-      price: 83.92,
+      price_cents: 83.92,
       date: '14.09.2018',
       distance: 10,
       user: user
@@ -46,7 +46,7 @@ describe 'StatisticsAPI', type: :request do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',
       destination_address: 'Marii Grzegorzewskiej 4, Warszawa',
-      price: 123.22,
+      price_cents: 123.22,
       date: '02.09.2018',
       distance: 15,
       user: user
@@ -78,7 +78,7 @@ describe 'StatisticsAPI', type: :request do
             'start_address' => ride_1_day_ago.start_address,
             'destination_address' => ride_1_day_ago.destination_address,
             'distance' => ride_1_day_ago.distance,
-            'price' => ride_1_day_ago.price.to_f,
+            'price' => ride_1_day_ago.price_cents,
             'date' => ride_1_day_ago.date.strftime('%Y-%m-%d')
           },
           {
@@ -86,7 +86,7 @@ describe 'StatisticsAPI', type: :request do
             'start_address' => ride_today.start_address,
             'destination_address' => ride_today.destination_address,
             'distance' => ride_today.distance,
-            'price' => ride_today.price.to_f,
+            'price' => ride_today.price_cents,
             'date' => ride_today.date.strftime('%Y-%m-%d')
           }]
         )
