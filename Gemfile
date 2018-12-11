@@ -5,11 +5,14 @@ ruby '2.5.1'
 
 gem 'activeadmin'
 gem 'bootstrap', '~> 4.1.3'
+gem 'carrierwave'
 gem 'devise'
+gem 'fog-aws'
 gem 'geocoder'
 gem 'grape'
 gem 'jquery-rails'
 gem 'jwt'
+gem 'mini_magick'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rack-cors', require: 'rack/cors'
@@ -41,7 +44,8 @@ group :development do
 end
 
 group :development, :test do
-  gem 'factory_bot'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :test do
