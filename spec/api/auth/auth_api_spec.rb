@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'AuthAPI', type: :request do
-  describe 'POST /auth' do
+  describe 'POST /api/auth' do
     let(:params) do
       {
         email: email,
@@ -34,20 +34,14 @@ describe 'AuthAPI', type: :request do
         subject
         expect(response.status).to eq(406)
         expect(response_body).to eq(
-          'error' => 'email is missing, password is missing, password_confirmation is missing'
+          'error' => 'email is missing, password is missing, password_confirmation is missing, first_name is missing, last_name is missing'
         )
       end
     end
   end
 
   describe 'POST /api/auth/login' do
-    let!(:user) do
-      User.create(
-        email: 'qwe@qwe.qwe',
-        password: 'secret_password',
-        password_confirmation: 'secret_password'
-      )
-    end
+    let!(:user) { create(:user, :confirmed) }
   
     let(:params) do
       {
@@ -59,8 +53,8 @@ describe 'AuthAPI', type: :request do
     subject { post '/api/auth/login', params: params }
 
     context 'with valid params' do
-      let(:email) { 'qwe@qwe.qwe' }
-      let(:password) { 'secret_password' }
+      let(:email) { user.email }
+      let(:password) { user.password }
 
       include_examples '201'
 
@@ -70,6 +64,7 @@ describe 'AuthAPI', type: :request do
         expect(response_body).to have_key('user')
       end
     end
+
     context 'with invalid params' do
       context 'invalid username' do
         let(:email) { 'qwe@qwe.com' }

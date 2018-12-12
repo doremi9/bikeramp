@@ -1,11 +1,13 @@
 require 'rails_helper'
 
-describe Users::CreateService, type: :service do
+describe UserServices::Create, type: :service do
   include ActiveJob::TestHelper
 
   let(:attributes) do
     {
       email: email,
+      first_name: first_name,
+      last_name: last_name,
       password: password,
       password_confirmation: password_confirmation
     }
@@ -16,6 +18,8 @@ describe Users::CreateService, type: :service do
   context 'valid attributes' do
     let(:email) { 'some@email.com' }
     let(:password) { 'password' }
+    let(:first_name) { 'John' }
+    let(:last_name) { 'Doe' }
     let(:password_confirmation) { 'password' }
 
     it 'creates a new user' do
@@ -34,6 +38,8 @@ describe Users::CreateService, type: :service do
 
   context 'invalid attributes' do
     let(:email) {}
+    let(:first_name) {}
+    let(:last_name) {}
     let(:password) {}
     let(:password_confirmation) {}
 
@@ -45,7 +51,8 @@ describe Users::CreateService, type: :service do
         ["Email can't be blank",
          "Password can't be blank",
          'Password is too short (minimum is 6 characters)',
-         "Password confirmation can't be blank"]
+         "Password confirmation can't be blank",
+         "First name can't be blank", "Last name can't be blank"]
       )
     end
   end

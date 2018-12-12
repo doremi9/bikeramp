@@ -4,7 +4,7 @@ describe 'UsersAPI', type: :request do
   describe 'GET /users/:id' do
     subject { get "/users/#{user.id}" }
 
-    context 'when user exists' do
+    xcontext 'when user exists' do
       let(:user) { create(:user, :with_avatar) }
 
       it 'returns the user' do
@@ -12,7 +12,7 @@ describe 'UsersAPI', type: :request do
       end
     end
 
-    context 'when user does not exist' do
+    xcontext 'when user does not exist' do
       it 'does not return the user' do
 
       end

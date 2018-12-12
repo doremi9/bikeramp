@@ -2,7 +2,7 @@ module API
   class Core < Grape::API
     prefix :api
     include ErrorHandlers
-    formatter :json, Grape::Formatter::ActiveModelSerializers
+    formatter :json, Grape::Formatter::JSONAPIResources
     default_format :json
     helpers AuthHelpers
     content_type :json, 'application/json'

@@ -14,4 +14,8 @@ FactoryBot.define do
   trait :with_avatar do
     avatar File.open('spec/fixtures/files/jpg.jpg')
   end
+
+  trait :confirmed do
+    confirmed_at Time.current
+  end
 end

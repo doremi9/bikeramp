@@ -7,8 +7,8 @@ module Auth
         requires :email, type: String
         requires :password, type: String
         requires :password_confirmation, type: String
-        optional :first_name, type: String
-        optional :last_name, type: String
+        requires :first_name, type: String
+        requires :last_name, type: String
       end
     end
 
@@ -17,7 +17,7 @@ module Auth
       use :user_params
     end
     post do
-      result = Users::CreateService.new(params).call
+      result = UserServices::Create.new(params).call
       if result.success?
         status :ok
       else

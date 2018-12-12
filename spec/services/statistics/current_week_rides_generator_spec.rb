@@ -4,9 +4,7 @@ describe Statistics::CurrentWeekRidesGenerator, type: :service do
   before { Timecop.freeze(Date.new(2018, 10, 24)) }
   after { Timecop.return }
 
-  let!(:user) do
-    User.create(email: 'email@mail.com', password: 'password', password_confirmation: 'password')
-  end
+  let(:user) { create(:user) }
   let!(:ride_today) do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',

@@ -5,13 +5,7 @@ require 'rails_helper'
 describe 'StatisticsAPI', type: :request do
   before { Timecop.freeze(Time.new(2018, 9, 25, 10, 30).utc) }
 
-  let!(:user) do
-    User.create(
-      email: 'email@mail.com',
-      password: 'password',
-      password_confirmation: 'password'
-    )
-  end
+  let(:user) { create(:user) }
   let!(:ride_today) do
     Ride.create!(
       start_address: 'Aleje Jerozolimskie 10, Warszawa',

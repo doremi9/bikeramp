@@ -1,5 +1,7 @@
-module Users
-  class CreateService < ApplicationService
+# frozen_string_literarl: true
+
+module UserServices
+  class Create < ApplicationService
     def initialize(params)
       @params = params
     end

@@ -3,13 +3,7 @@
 require 'rails_helper'
 
 describe 'TripsAPI', type: :request do
-  let(:user) do
-    User.create(
-      email: 'email@mail.com',
-      password: 'password',
-      password_confirmation: 'password'
-    )
-  end
+  let(:user) { create(:user) }
   describe 'POST /api/trips' do
     let(:start_address) { 'Plac Europejski 2, Warszawa' }
     let(:destination_address) { 'Aleje Jerozolimskie 10, Warszawa' }
