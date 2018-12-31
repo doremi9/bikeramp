@@ -12,8 +12,7 @@ module UserServices
         password: params[:password],
         password_confirmation: params[:password_confirmation],
         first_name: params[:first_name],
-        last_name: params[:last_name],
-        avatar: File.open('app/assets/images/fallback/default.jpg')
+        last_name: params[:last_name]
       )
       user.save ? success(data: user) : failure(data: user, message: user.errors.full_messages)
     end
