@@ -143,7 +143,7 @@ describe 'TripsAPI', type: :request do
         
         include_examples '204'
         
-        it 'updates the rides with attribtues set in params' do
+        it 'updates the rides with attribtues from params' do
           subject
           updated_ride = ride.reload
           expect(updated_ride.start_address).to eq(params[:start_address])
