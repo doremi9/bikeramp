@@ -1,6 +1,6 @@
 module Auth
   class Base < API::Core
-    resources :auth do
+    namespace :auth do
       mount AuthAPI
     end
   end
