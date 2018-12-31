@@ -42,7 +42,7 @@ module Trips
     end
 
     desc "Deletes user's ride"
-    delete ':id' do
+    delete '/:id' do
       ride = current_user.rides.find(params[:id])
       ride.destroy
       body false
