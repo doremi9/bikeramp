@@ -8,8 +8,9 @@ module Users
       optional :password, type: String
       optional :password_confirmation, type: String
     end
-    patch do
-      UserServices::Update.new(current_user, params).call
+    patch '/:id' do
+      user = User.find(params[:id])
+      user.update(params)
       body false
     end
   end
