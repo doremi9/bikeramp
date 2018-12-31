@@ -5,7 +5,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
 
-  version :avatar do
+  version :avatar_m do
     process resize_to_fill: [226, 150]
   end
 
