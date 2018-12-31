@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module AuthHelpers
-  extend Grape::API::Helpers
-  
   def authenticate_user!
     begin
       payload = JsonWebToken.decode(token)
