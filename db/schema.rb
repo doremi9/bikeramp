@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_07_093502) do
+ActiveRecord::Schema.define(version: 2019_01_01_203202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,36 @@ ActiveRecord::Schema.define(version: 2018_12_07_093502) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "invoice_line_items", force: :cascade do |t|
+    t.string "name"
+    t.integer "quantity"
+    t.bigint "net_amount_cents", default: 0
+    t.bigint "gross_amount_cents", default: 0
+    t.float "vat", default: 0.0
+    t.bigint "price_net_cents", default: 0
+    t.bigint "invoice_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoice_id"], name: "index_invoice_line_items_on_invoice_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.string "number"
+    t.date "creation_date"
+    t.date "sale_date"
+    t.date "due_date"
+    t.string "currency"
+    t.string "payment_method"
+    t.bigint "total_net_amount_cents", default: 0
+    t.bigint "total_gross_amount_cents", default: 0
+    t.string "payment_status"
+    t.boolean "paid", default: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
   create_table "rides", force: :cascade do |t|
@@ -81,5 +111,7 @@ ActiveRecord::Schema.define(version: 2018_12_07_093502) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "invoice_line_items", "invoices"
+  add_foreign_key "invoices", "users"
   add_foreign_key "rides", "users"
 end
