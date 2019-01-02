@@ -14,6 +14,8 @@ gem 'jquery-rails'
 gem 'jwt'
 gem 'mini_magick'
 gem 'pg', '>= 0.18', '< 2.0'
+gem 'prawn'
+gem 'prawn-table'
 gem 'puma', '~> 3.11'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 5.2.0'
@@ -50,6 +52,6 @@ end
 
 group :test do
   gem 'rspec-rails'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '4.0.0.rc1'
   gem 'timecop'
 end
