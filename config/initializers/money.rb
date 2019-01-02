@@ -3,3 +3,4 @@ MoneyRails.configure do |config|
   config.default_currency = :pln
 end
 
+Money.locale_backend = :i18n
