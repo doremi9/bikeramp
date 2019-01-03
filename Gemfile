@@ -14,6 +14,7 @@ gem 'jquery-rails'
 gem 'jwt'
 gem 'mini_magick'
 gem 'pg', '>= 0.18', '< 2.0'
+gem 'pdf-inspector', require: "pdf/inspector"
 gem 'prawn'
 gem 'prawn-table'
 gem 'puma', '~> 3.11'
