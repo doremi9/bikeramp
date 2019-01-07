@@ -21,11 +21,8 @@ module Trips
 
     post do
       result = Rides::CreateRide.new(params, current_user).call
-      if result.success?
-        result.data
-      else
-        error!({ message: result.message }, 403)
-      end
+      return error!({ message: result.message }, 403) unless result.success?
+      result.data
     end
 
     desc "Updates user's ride"
