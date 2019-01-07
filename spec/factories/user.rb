@@ -2,20 +2,21 @@
 
 FactoryBot.define do
   factory :user do
-    first_name Faker::Name.first_name
-    last_name Faker::Name.last_name
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
     sequence :email do |n|
       "#{n}-#{Faker::Internet.email}"
     end
-    password "Password"
-    password_confirmation "Password"
+    password { 'Password' }
+    password_confirmation { 'Password' }
+    phone_number { 123456789 }
   end
 
   trait :with_avatar do
-    avatar File.open('spec/fixtures/files/jpg.jpg')
+    avatar { File.open('spec/fixtures/files/jpg.jpg') }
   end
 
   trait :confirmed do
-    confirmed_at Time.current
+    confirmed_at { Time.current }
   end
 end
