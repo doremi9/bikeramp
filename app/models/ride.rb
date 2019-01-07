@@ -1,5 +1,5 @@
 class Ride < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   validates_presence_of :start_address, :destination_address, :price_cents, :date, :user
 
   monetize :price_cents
