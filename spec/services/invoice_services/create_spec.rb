@@ -6,19 +6,19 @@ describe InvoiceServices::Create, type: :service do
     {
       name: Faker::Lorem.sentence,
       quantity: 2,
-      net_amount_cents: Money.new(20_0000_00),
-      gross_amount_cents: Money.new(20_0000_00),
-      price_net_cents: Money.new(20_0000_00),
+      net_amount_cents: Money.new(20_000_000),
+      gross_amount_cents: Money.new(20_000_000),
+      price_net_cents: Money.new(20_000_000),
       vat: 23.0
     }
   end
   let(:invoice_line_item2) do
     {
       name: Faker::Lorem.sentence,
-      quantity: 1,
-      net_amount_cents: Money.new(30_0000_00),
-      gross_amount_cents: Money.new(30_0000_00),
-      price_net_cents: Money.new(40_0000_00),
+      quantity: 2,
+      net_amount_cents: Money.new(20_000_000),
+      gross_amount_cents: Money.new(20_000_000),
+      price_net_cents: Money.new(20_000_000),
       vat: 23.0
     }
   end
@@ -30,37 +30,29 @@ describe InvoiceServices::Create, type: :service do
       due_date: Date.current + 14.days,
       currency: Faker::Currency.code,
       payment_method: 'transfer',
-      total_net_amount_cents: Money.new(60_000_00),
-      total_gross_amount_cents: Money.new(60_0000_00),
-      payment_status: 'pending',
+      total_net_amount: Money.new(60_000_00),
+      total_gross_amount: Money.new(60_000_00),
       invoice_line_items: [invoice_line_item1, invoice_line_item2]
     }
   end
 
-  subject { described_class.new(params, user) }
+  subject { described_class.new(params, user) }  
 
-  context 'when user passes valid params' do
-    before { @result = subject.call }
+  before { @result = subject.call }
 
-    it 'creates invoice for the user' do
-      expect(@result).to be_success
-    end
-
-    it 'creates invoice line items for the invoice' do
-      expect(@result.data.invoice_line_items.count).to eq(2)
-    end
-
-    it 'calls Invoices::GeneratePdfJob job t ogenerate PDF' do
-      ActiveJob::Base.queue_adapter = :test
-      expect {
-        Invoices::GeneratePdfJob.perform_later(@result.data)
-      }.to enqueue_job(Invoices::GeneratePdfJob).with(@result.data)
-    end
+  it 'creates invoice for the user' do
+    expect(@result).to be_success
   end
 
-  xcontext 'when I pass invalid params' do
-    it 'does not create invoice' do
+  it 'creates invoice line items for the invoice' do
+    invoice = Invoice.last
+    expect(invoice.invoice_line_items.count).to eq(2)
+  end
 
-    end
+  it 'calls Invoices::GeneratePdfJob job to generate PDF' do
+    ActiveJob::Base.queue_adapter = :test
+    expect do
+      Invoices::GeneratePdfJob.perform_later(@result.data)
+    end.to enqueue_job(Invoices::GeneratePdfJob).with(@result.data)
   end
 end
