@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_01_203202) do
+ActiveRecord::Schema.define(version: 2019_01_07_101242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,10 +49,10 @@ ActiveRecord::Schema.define(version: 2019_01_01_203202) do
   create_table "invoice_line_items", force: :cascade do |t|
     t.string "name"
     t.integer "quantity"
-    t.bigint "net_amount_cents", default: 0
-    t.bigint "gross_amount_cents", default: 0
+    t.decimal "net_amount_cents", precision: 10, scale: 2, default: "0.0"
+    t.decimal "gross_amount_cents", precision: 10, scale: 2, default: "0.0"
     t.float "vat", default: 0.0
-    t.bigint "price_net_cents", default: 0
+    t.decimal "price_net_cents", precision: 10, scale: 2, default: "0.0"
     t.bigint "invoice_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -66,13 +66,14 @@ ActiveRecord::Schema.define(version: 2019_01_01_203202) do
     t.date "due_date"
     t.string "currency"
     t.string "payment_method"
-    t.bigint "total_net_amount_cents", default: 0
-    t.bigint "total_gross_amount_cents", default: 0
-    t.string "payment_status"
+    t.decimal "total_net_amount_cents", precision: 10, scale: 2, default: "0.0"
+    t.decimal "total_gross_amount_cents", precision: 10, scale: 2, default: "0.0"
+    t.string "payment_status", default: "pending"
     t.boolean "paid", default: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "file"
     t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
@@ -106,6 +107,13 @@ ActiveRecord::Schema.define(version: 2019_01_01_203202) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
+    t.string "facebook_url"
+    t.string "twitter_url"
+    t.string "linked_in_url"
+    t.string "hourly_rate"
+    t.integer "rides_count", default: 0, null: false
+    t.integer "phone_number"
+    t.string "username"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
