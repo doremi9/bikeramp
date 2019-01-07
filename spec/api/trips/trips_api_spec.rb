@@ -69,14 +69,13 @@ describe 'TripsAPI', type: :request do
           date: date
         }
       end
-      include_examples 'Unauthenticated' 
+      include_examples 'Unauthenticated'
     end
   end
 
   describe 'GET /api/trips' do
-
     subject { get '/api/trips', headers: headers }
-    
+
     context 'when user is authenticated' do
       let!(:ride1) do
         Ride.create(
