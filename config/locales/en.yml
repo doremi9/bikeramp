@@ -34,3 +34,15 @@ en:
     invalid_token: 'Authentication failed: invalid token'
     unauthenticated: 'You must be logged in before continuing'
     invalid_credentials: 'Invalid username or password'
+  pdf:
+    headers:
+      row_num: 'No'
+      name: 'Name'
+      quantity: 'Quantity'
+      price_net_amount: 'Price Net'
+      net_amount: 'Net amount'
+      gross_amount: 'Gross amount'
+      vat: 'VAT'
+
+
+
