@@ -7,8 +7,11 @@ describe 'UsersAPI', type: :request do
         {
           first_name: 'John',
           last_name: 'Doe',
-          password: 'password',
-          password_confirmation: 'password',
+          facebook_url: 'http://www.test.com',
+          twitter_url: 'http://www.test.com',
+          linked_in_url: 'http://www.test.com',
+          phone_number: 123123123,
+          hourly_rate: '10$/h',
           avatar: fixture_file_upload("spec/fixtures/files/jpg.jpg", 'image/jpeg')
         }
     end
@@ -25,6 +28,10 @@ describe 'UsersAPI', type: :request do
         updated_user = user.reload
         expect(updated_user.first_name).to eq(params[:first_name])
         expect(updated_user.last_name).to eq(params[:last_name])
+        expect(updated_user.phone_number).to eq(params[:phone_number])
+        expect(updated_user.facebook_url).to eq(params[:facebook_url])
+        expect(updated_user.twitter_url).to eq(params[:twitter_url])
+        expect(updated_user.linked_in_url).to eq(params[:linked_in_url])
         expect(updated_user.avatar.url).not_to be_empty
       end
     end
