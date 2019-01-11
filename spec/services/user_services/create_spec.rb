@@ -50,8 +50,6 @@ describe UserServices::Create, type: :service do
       expect(result.message).to eq(
         ["Email can't be blank",
          "Password can't be blank",
-         'Password is too short (minimum is 6 characters)',
-         "Password confirmation can't be blank",
          "First name can't be blank", "Last name can't be blank"]
       )
     end
