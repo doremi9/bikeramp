@@ -21,7 +21,14 @@ module Users
     patch '/:id' do
       user = User.find(params[:id])
       user.update(params)
-      body false
+      raise ValidationError, user.errors.full_messages unless user.valid?
+
+      return { status: 204 }
+    end
+
+    desc 'Fetch current user'
+    get '/:id' do
+      User.find(params[:id])
     end
   end
 end
