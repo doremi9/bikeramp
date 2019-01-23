@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InvoiceFileUploader < CarrierWave::Uploader::Base
   # storage :file
 
@@ -11,5 +13,12 @@ class InvoiceFileUploader < CarrierWave::Uploader::Base
 
   def size_range
     1..10.megabytes
+  end
+
+  private
+
+  def env_path
+    env = Rails.env.test? ? '/spec' : ''
+    "uploads#{env}"
   end
 end
