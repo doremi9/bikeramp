@@ -13,6 +13,7 @@ module Invoices
       pdf.render_file(file_name)
       file = File.new(file_name)
       invoice.file = file
+      invoice.save
       File.delete(file_name)
     end
   end
