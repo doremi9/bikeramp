@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class AvatarUploader < CarrierWave::Uploader::Base
-  # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
 
   version :avatar_m do
@@ -12,9 +10,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   version :avatar_s, from_version: :avatar do
     process resize_to_fill: [48, 48]
   end
-  # Choose what kind of storage to use for this uploader:
-  # storage :file
-  # storage :fog
 
   def store_dir
     "#{env_path}/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
@@ -28,12 +23,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
     1..10.megabytes
   end
 
-  def default_url(*args)
-    "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  end
-
-  # def scale(width, height)
-  #   # do something
+  # def default_url(*args)
+  #   "#{asset_host}/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
   def filename
