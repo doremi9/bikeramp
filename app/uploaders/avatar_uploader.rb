@@ -23,9 +23,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
     1..10.megabytes
   end
 
-  # def default_url(*args)
-  #   "#{asset_host}/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  # end
+  def default_url(*args)
+    "https://s3-us-west-2.amazonaws.com/bikeramp/uploads/images/fallback/" + [version_name, "default.jpg"].compact.join('_')
+  end
 
   def filename
     "#{secure_token}.#{file.extension}" if original_filename.present?
