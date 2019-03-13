@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_07_101242) do
+ActiveRecord::Schema.define(version: 2019_03_13_111936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,10 +107,10 @@ ActiveRecord::Schema.define(version: 2019_01_07_101242) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
-    t.string "facebook_url"
-    t.string "twitter_url"
-    t.string "linked_in_url"
-    t.string "hourly_rate"
+    t.string "facebook_url", default: ""
+    t.string "twitter_url", default: ""
+    t.string "linked_in_url", default: ""
+    t.string "hourly_rate", default: ""
     t.integer "rides_count", default: 0, null: false
     t.integer "phone_number"
     t.string "username"
