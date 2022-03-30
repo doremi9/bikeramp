@@ -222,7 +222,9 @@ GEM
     mime-types (3.2.2)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2018.0812)
-    mimemagic (0.3.3)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_magick (4.9.4)
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
@@ -273,7 +275,8 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (3.0.3)
-    puma (3.12.6)
+    puma (4.3.12)
+      nio4r (~> 2.0)
     rack (2.2.3)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -413,7 +416,7 @@ DEPENDENCIES
   prawn-table
   pry
   pry-rails
-  puma (~> 3.12)
+  puma (~> 4.3)
   rack-cors
   rails (~> 5.2.0)
   rspec-rails
